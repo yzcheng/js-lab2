@@ -1,0 +1,29 @@
+{
+  "name": "js-lab2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular2": "^2.0.0-beta.13",
+    "es6-shim": "^0.35.0",
+    "ng2-bootstrap": "^1.0.10",
+    "officegen": "^0.2.9",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "^5.0.0-beta.5",
+    "systemjs": "^0.19.25",
+    "typescript": "^1.8.9",
+    "zone.js": "^0.6.9"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.2.0"
+  }
+}
