@@ -10,11 +10,9 @@
         "noImplicitAny": false,
         "outDir": "lib"
     },
-    "fileGlob" : [
-      "**/*.ts"
-    ],
     "files": [
         "node_modules/angular2/typings/browser.d.ts",
+        "node_modules/ng2-bootstrap/dist/ng2-bootstrap",
         "app/boot.ts"
     ]
 }
