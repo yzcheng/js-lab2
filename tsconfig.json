@@ -10,9 +10,18 @@
         "noImplicitAny": false,
         "outDir": "lib"
     },
+    "exclude": [
+        "node_modules",
+        "typings"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "atom": {
+        "rewriteTsconfig": true
+    },
     "files": [
         "node_modules/angular2/typings/browser.d.ts",
         "node_modules/ng2-bootstrap/dist/ng2-bootstrap",
-        "app/boot.ts"
+        "src/app/boot.ts"
     ]
 }

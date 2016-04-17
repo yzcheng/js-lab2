@@ -1,0 +1,18 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "ui-grid/ui-grid.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    }
+  }
+}
