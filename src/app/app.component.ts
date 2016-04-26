@@ -1,4 +1,4 @@
-import {Component, OnInit, provide, Injector, ElementRef, ResolvedProvider} from 'angular2/core';
+import {Component, OnInit, provide, Injector, ElementRef, ResolvedProvider, ViewEncapsulation} from 'angular2/core';
 import { Alert } from 'ng2-bootstrap/components/alert';
 import { ModalDialogInstance, ModalConfig, Modal, ICustomModal, YesNoModalContent, YesNoModal} from 'angular2-modal';
 import {CustomModalComponent, CustomModalComponentData} from './modal/custom-modal.component';
@@ -7,17 +7,28 @@ import {CustomModalComponent, CustomModalComponentData} from './modal/custom-mod
     //templateUrl: './app/app.component.html',
     selector: 'my-app',
     directives: [Alert],
-    inputs: ['title'],
     providers: [Modal],
+    styles : [`
+    `],
     template: `
-      <h2>{{title}}</h2>
-      <alert dismissOnTimeout="300000">This alert will dismiss in 3s</alert>
-      <button (click)="openDialog('large')">Click</button>
+      <paper-toolbar>
+        <span class="title">{{title}}</span>
+        <paper-icon-button icon="add">+</paper-icon-button>
+      </paper-toolbar>
+      <alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
+      <paper-button raised (click)="openDialog('large')">
+        <iron-icon icon="add-box"></iron-icon>
+        Click
+      </paper-button>
+      <paper-button raised (click)="openCustomModal()">
+        <iron-icon icon="add-box"></iron-icon>
+        Click to Open Custom GUI
+      </paper-button>
       <div *ngIf="lastModalResult">
         {{lastModalResult}}
       </div>
-      <button (click)="openCustomModal()">Click to Open Custom GUI</button>
-    `
+    `,
+    encapsulation : ViewEncapsulation.Native
 })
 export class AppComponent implements OnInit {
     public title: string = "Init...";
