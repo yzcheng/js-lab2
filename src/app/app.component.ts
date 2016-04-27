@@ -1,13 +1,18 @@
-import {Component, OnInit, provide, Injector, ElementRef, ResolvedProvider, ViewEncapsulation} from 'angular2/core';
+import {Component, OnInit, provide, Injector, ElementRef, ResolvedReflectiveProvider, ViewEncapsulation} from 'angular2/core';
 import { Alert } from 'ng2-bootstrap/components/alert';
+import {AgGridNg2} from 'ag-grid-ng2/main';
+import {GridOptions} from 'ag-grid/main';
 import { ModalDialogInstance, ModalConfig, Modal, ICustomModal, YesNoModalContent, YesNoModal} from 'angular2-modal';
 import {CustomModalComponent, CustomModalComponentData} from './modal/custom-modal.component';
+
+import 'ag-grid-enterprise/main';
 
 @Component({
     //templateUrl: './app/app.component.html',
     selector: 'my-app',
-    directives: [Alert],
+    directives: [Alert, AgGridNg2],
     providers: [Modal],
+    styleUrls : ['node_modules/bootstrap/dist/css/bootstrap.css', 'node_modules/ag-grid/dist/styles/ag-grid.css', 'node_modules/ag-grid/dist/styles/theme-fresh.css'],
     styles : [`
     `],
     template: `
@@ -15,6 +20,14 @@ import {CustomModalComponent, CustomModalComponentData} from './modal/custom-mod
         <span class="title">{{title}}</span>
         <paper-icon-button icon="add">+</paper-icon-button>
       </paper-toolbar>
+      <div>
+      <ag-grid-ng2 class="ag-fresh"
+        style="height: 300px;"
+        [gridOptions]="gridOptions"
+        [columnDefs]="columnDefs"
+        [rowData] = "rowData">
+      </ag-grid-ng2>
+      </div>
       <alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
       <paper-button raised (click)="openDialog('large')">
         <iron-icon icon="add-box"></iron-icon>
@@ -31,6 +44,13 @@ import {CustomModalComponent, CustomModalComponentData} from './modal/custom-mod
     encapsulation : ViewEncapsulation.Native
 })
 export class AppComponent implements OnInit {
+  public columnDefs = [
+    {headerName: "Make", field: "make" },
+    { headerName: "Model", field: "model" }
+  ];
+  public rowData = [];
+  public gridOptions = {rowHeight:100};
+
     public title: string = "Init...";
     public lastModalResult: string;
 
@@ -43,7 +63,7 @@ export class AppComponent implements OnInit {
 
     openDialog(type: string) {
         //context
-        let resolvedProviders:ResolvedProvider[] = Injector.resolve([
+        let resolvedProviders = Injector.resolve([
             provide(ICustomModal, { useValue: new YesNoModalContent('Simple Large modal', 'Press ESC or click OK / outside area to close.', false) })
         ]);
 
@@ -62,7 +82,7 @@ export class AppComponent implements OnInit {
 
     openCustomModal() {
         //context
-        let resolvedProviders:ResolvedProvider[] = Injector.resolve([provide(ICustomModal, { useValue: new CustomModalComponentData() })]);
+        let resolvedProviders = Injector.resolve([provide(ICustomModal, { useValue: new CustomModalComponentData() })]);
 
         let dialog: Promise<ModalDialogInstance> = this.modal.open(
             <any>CustomModalComponent,
